@@ -23,7 +23,7 @@ const register_post = async (req, res) => {
   // Change format of date
   dob = moment(dob).format("YYYY-MM-DD");
 
-  if (moment(dob).diff(todayDate, "days") > 0) {
+  if ((await moment(dob).diff(todayDate, "days")) > 0) {
     res.render("register", {
       message: "User must be at least 13 year old to register",
       date: todayDate,
