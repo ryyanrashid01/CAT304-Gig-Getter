@@ -4,8 +4,10 @@ const bcrypt = require("bcrypt");
 
 const pool = require("../db");
 
+let todayDate = moment().subtract(13, "years").format("YYYY-MM-DD");
+
 const register_get = function (req, res) {
-  res.render("register", { message: null });
+  res.render("register", { message: null, date: todayDate });
 };
 
 const register_post = async (req, res) => {
@@ -14,11 +16,20 @@ const register_post = async (req, res) => {
   if (!fName || !lName || !dob || !email || !password) {
     res.render("register", {
       message: "Please fill all the fields",
+      date: todayDate,
     });
   }
 
   // Change format of date
   dob = moment(dob).format("YYYY-MM-DD");
+
+  if (moment(dob).diff(todayDate, "days") > 0) {
+    res.render("register", {
+      message: "User must be at least 13 year old to register",
+      date: todayDate,
+    });
+    return;
+  }
 
   // Check if email already exists in database
   var query = "SELECT * FROM Users WHERE email = " + escape(email);
@@ -28,11 +39,13 @@ const register_post = async (req, res) => {
       console.log(err);
       res.render("register", {
         message: "Internal Server Error! Please try again later.",
+        date: todayDate,
       });
     }
     if (result[0]) {
       res.render("register", {
         message: "Email already in use. Sign in or use another email.",
+        date: todayDate,
       });
     } else {
       // Capitalise first letter of name
@@ -47,11 +60,13 @@ const register_post = async (req, res) => {
             console.log(err);
             res.render("register", {
               message: "Internal Server Error! Please try again later.",
+              date: todayDate,
             });
           }
           res.render("login", {
             type: "success",
             message: "Registration successful!",
+            date: todayDate,
           });
         }
       );
