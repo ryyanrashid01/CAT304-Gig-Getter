@@ -1,0 +1,5 @@
+CREATE TABLE Admin (
+   admin_ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+   admin_Email VARCHAR(100) NOT NULL,
+   admin_Password VARCHAR(60) NOT NULL
+);
