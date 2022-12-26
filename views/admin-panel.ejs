@@ -10,7 +10,7 @@
       integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
       crossorigin="anonymous"
     />
-    <title>Gig Getter | Home</title>
+    <title>Gig Getter | Admin</title>
   </head>
   <style>
     * {
@@ -30,6 +30,8 @@
     .avatar {
       text-align: center;
       width: 120px;
+      outline: 3px solid #868e96;
+      border-radius: 0.3rem;
     }
     .buttons {
       display: flex;
@@ -41,27 +43,30 @@
   </style>
   <body>
     <div class="landing-page">
-      <h1>Marketplace</h1>
-      <% if (session.user_id) { %>
+      <h1>Admin Panel</h1>
+      <% if (session.admin_id) { %>
       <img
-        src="https://avatars.dicebear.com/api/initials/<%= session.fName %> <%= session.lName %>.svg"
+        src="https://avatars.dicebear.com/api/identicon/<%= session.admin_Uname %>.svg"
         alt=""
         class="avatar"
       />
-      <h3>Welcome <%= session.fName %> <%= session.lName %></h3>
-      <a href="/logout"
-        ><button type="button" class="btn btn-primary">Logout</button></a
-      >
-      <% } else { %>
-      <h3>Welcome</h3>
+      <h3>Welcome <%= session.admin_Uname %>#<%= session.admin_id %></h3>
+
       <div class="buttons">
-        <a href="/register"
-          ><button type="button" class="btn btn-primary">Register</button></a
+        <a href="/admin-logout"
+          ><button type="button" class="btn btn-primary">Logout</button></a
         >
-        <a href="/login"
-          ><button type="button" class="btn btn-success">Login</button></a
+        <a href="/admin-register"
+          ><button type="button" class="btn btn-success">
+            Register admin
+          </button></a
         >
       </div>
+      <% } else { %>
+      <h3>Login to access Admin Dashboard</h3>
+      <a href="/admin-login"
+        ><button type="button" class="btn btn-success">Login</button></a
+      >
       <% } %>
     </div>
   </body>

@@ -66,7 +66,6 @@ const register_post = async (req, res) => {
           res.render("login", {
             type: "success",
             message: "Registration successful!",
-            date: todayDate,
           });
         }
       );

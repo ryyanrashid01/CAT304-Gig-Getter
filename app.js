@@ -12,6 +12,16 @@ const pool = require("./db");
 const { register_get, register_post } = require("./routes/register");
 const index = require("./routes/index");
 const { login_get, login_post, logout } = require("./routes/login");
+const {
+  admin_login_get,
+  admin_login_post,
+  admin_logout,
+} = require("./routes/admin-login");
+const { admin_panel_get } = require("./routes/admin-panel");
+const {
+  admin_register_get,
+  admin_register_post,
+} = require("./routes/admin-register");
 
 // Set up Express JS
 const app = express();
@@ -55,6 +65,18 @@ app.get("/logout", logout);
 app.get("/register", register_get);
 
 app.post("/register", register_post);
+
+app.get("/admin-login", admin_login_get);
+
+app.post("/admin-login", admin_login_post);
+
+app.get("/admin-panel", admin_panel_get);
+
+app.get("/admin-logout", admin_logout);
+
+app.get("/admin-register", admin_register_get);
+
+app.post("/admin-register", admin_register_post);
 
 app.listen(port, function () {
   console.log("Server started on port " + port);

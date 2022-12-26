@@ -10,7 +10,7 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
       rel="stylesheet"
     />
-    <title>Gig Getter | Login</title>
+    <title>Gig Getter | Admin Login</title>
   </head>
   <style>
     * {
@@ -105,26 +105,21 @@
     <div class="global-container">
       <div class="card">
         <div class="card-body">
-          <h3 class="card-title">Log in to Gig Getter</h3>
+          <h3 class="card-title">Gig Getter Admin</h3>
           <% if (message) {%>
           <div class="<%= type %>-message"><%= message %></div>
           <% } %>
           <div class="card-text">
-            <form action="/login" method="post">
+            <form action="/admin-login" method="post">
               <div class="form-group">
-                <label for="inputEmail">Email</label>
-                <input type="email" name="email" id="inputEmail" />
+                <label for="inputUsername">Username</label>
+                <input type="text" name="username" id="inputUsername" />
               </div>
               <div class="form-group">
                 <label for="inputPassword">Password</label>
                 <input type="password" name="password" id="inputPassword" />
               </div>
               <button type="submit" class="btn">Sign in</button>
-
-              <div class="sign-up">
-                Don't have an accout?
-                <a href="/register"> Sign up </a>
-              </div>
             </form>
           </div>
         </div>
