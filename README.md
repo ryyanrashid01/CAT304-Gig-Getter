@@ -8,7 +8,7 @@ To run GigGetter locally:
 5. Cd into the folder and run this command: `npm i`
 6. Run this command: `node app.js` <br>
    OR <br>
-   Run these commands to automatically restart the server after changes:
+   Run these commands to automatically restart the server after changes: <br>
    `npm i -g nodemon` <br>
    `nodemon app.js`
 7. Go to this link in the browser: http://localhost:3000/
