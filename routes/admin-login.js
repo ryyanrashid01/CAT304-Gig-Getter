@@ -21,7 +21,7 @@ const admin_login_post = async (req, res) => {
   //   let pass_hash = await bcrypt.hash(process.env.ADMIN_ACC_PASSWORD, 10);
   //   pool.query(
   //     "INSERT INTO Admin VALUES (?,?,?,?)",
-  //     [221226, "admin", pass_hash, 221226],
+  //     [221226, "super", pass_hash, 221226],
   //     (err, success) => {
   //       if (err) {
   //         console.log(err);
