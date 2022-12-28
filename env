@@ -1,0 +1,6 @@
+DB_HOST="sql6.freesqldatabase.com"
+DB_PORT="3306"
+DB_USER="sql6585788"
+DB_PASSWORD="ZqWlUnP75Y"
+DB_DATABASE="sql6585788"
+SESSION_SECRET="CAT304Project GigGetter"
