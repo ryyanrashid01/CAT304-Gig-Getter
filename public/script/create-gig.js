@@ -23,20 +23,20 @@ var bidAmtValid = function () {
     }
 };
 
-// var dateValid = function () {
-//     bidEnd.min = new Date().toLocaleDateString('en-ca');
-//     bidStart.min = new Date().toLocaleDateString('en-ca');
-// };
+var dateValid = function () {
+    bidEnd.min = new Date().toLocaleDateString('en-ca');
+    bidStart.min = new Date().toLocaleDateString('en-ca');
+};
 
 
-function dateValid() {
-    var selectedText = bidStart.value;
-    var selectedDate = new Date(selectedText);
-    var now = new Date();
-    if (selectedDate < now) {
-     alert("Date must be in the future");
-    }
-  }
+// function dateValid() {
+//     var selectedText = bidStart.value;
+//     var selectedDate = new Date(selectedText);
+//     var now = new Date();
+//     if (selectedDate < now) {
+//      alert("Date must be in the future");
+//     }
+//   }
 
 document.addEventListener("keyup", () => {
     if (gigTitle && gigDesc && minBid && gigPoster && bidStart && bidEnd) {
