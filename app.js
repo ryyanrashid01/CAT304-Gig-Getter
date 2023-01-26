@@ -22,6 +22,11 @@ const {
   admin_register_get,
   admin_register_post,
 } = require("./routes/admin-register");
+const {
+  gig_post_get,
+  gig_post_post
+} = require("./routes/gig_post");
+
 
 // Set up Express JS
 const app = express();
@@ -77,6 +82,10 @@ app.get("/admin-logout", admin_logout);
 app.get("/admin-register", admin_register_get);
 
 app.post("/admin-register", admin_register_post);
+
+app.get("/gig_post", gig_post_get);
+
+app.post("/gig_post", gig_post_post);
 
 app.listen(port, function () {
   console.log("Server started on port " + port);
