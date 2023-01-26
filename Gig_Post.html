@@ -10,10 +10,11 @@
     
     
     
-    <h1>Lawn Mowing</h1>
+    <h1 id="Gig_Title"></h1>
     <h3>Current Bid: RM 30.00</h3>
     <script>
-        document.write(Current_Bid);
+        document.getElementById("Gig_Title").innerHTML = rows[0].gigTitle;
+        console.log(row[0].gigTitle);
     </script>
     <h3>Minimum Bid: RM 2.00</h3>
 
