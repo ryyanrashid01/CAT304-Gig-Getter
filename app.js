@@ -22,6 +22,8 @@ const {
   admin_register_get,
   admin_register_post,
 } = require("./routes/admin-register");
+const { profile_get } = require("./routes/profile");
+const { my_profile_get, my_profile_post } = require("./routes/my-profile");
 
 // Set up Express JS
 const app = express();
@@ -77,6 +79,12 @@ app.get("/admin-logout", admin_logout);
 app.get("/admin-register", admin_register_get);
 
 app.post("/admin-register", admin_register_post);
+
+app.get("/profile", my_profile_get);
+
+app.post("/profile", my_profile_post);
+
+app.get("/profile/:userId", profile_get);
 
 app.listen(port, function () {
   console.log("Server started on port " + port);

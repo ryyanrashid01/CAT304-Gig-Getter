@@ -38,17 +38,26 @@
     a {
       outline: none;
     }
+    h3 a {
+      color: #212529;
+    }
+    h3 a:hover {
+      color: #515a62;
+    }
   </style>
   <body>
     <div class="landing-page">
       <h1>Marketplace</h1>
       <% if (session.user_id) { %>
       <img
-        src="https://avatars.dicebear.com/api/initials/<%= session.fName %> <%= session.lName %>.svg"
+        src="https://avatars.dicebear.com/api/adventurer-neutral/<%= session.fName %> <%= session.lName %>.svg"
         alt=""
         class="avatar"
       />
-      <h3>Welcome <%= session.fName %> <%= session.lName %></h3>
+      <h3>
+        Welcome
+        <a href="/profile"> <%= session.fName %> <%= session.lName %></a>
+      </h3>
       <a href="/logout"
         ><button type="button" class="btn btn-primary">Logout</button></a
       >
