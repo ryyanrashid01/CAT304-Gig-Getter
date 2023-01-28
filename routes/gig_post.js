@@ -16,7 +16,7 @@ const gig_post_get = async (req, res) => {
     
     });
 
-    req.session.gigPostID = 2;
+    req.session.gigPostID = 1;
     var [rows, fields] = await connection.execute('SELECT * FROM `Gig_Post` WHERE `gigPostID` = ?', [req.session.gigPostID]);
     req.session.gigTitle = rows[0].gigTitle;
     req.session.gigDescription = rows[0].gigDescription;
@@ -32,7 +32,7 @@ const gig_post_get = async (req, res) => {
     
     if (rows[0]?.Highest_Bid == undefined){
         req.session.highestBid = req.session.startBid;
-        req.session.highestBidder = " ";
+        req.session.highestBidder = " - ";
         req.session.noBidder = 1;
     }
     else{
