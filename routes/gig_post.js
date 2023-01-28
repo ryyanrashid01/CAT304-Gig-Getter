@@ -1,28 +1,71 @@
 const session = require("express-session");
-const pool = require("../db");
+//const pool = require("../db");
 
-const gig_post_get = (req, res) => {
-    res.render("gig_post");
-    const [rows, fields] = pool.execute('SELECT * FROM `Gig_Post` WHERE `gigPostID` = ?', [2]);
-    var Gig_Title = rows[0].gigTitle;
-    var Gig_ID = rows[0].gigPostID;
+//Create connection
+const mysql = require('mysql2/promise');
+
+
+const gig_post_get = async (req, res) => {
+
+    const connection = await mysql.createConnection({
+
+        host: 'sql12.freesqldatabase.com',
+        user: 'sql12592913',
+        database: 'sql12592913',
+        password: 'VCmJjDvxQy'
+    
+    });
+
+    req.session.gigPostID = 2;
+    var [rows, fields] = await connection.execute('SELECT * FROM `Gig_Post` WHERE `gigPostID` = ?', [req.session.gigPostID]);
+    req.session.gigTitle = rows[0].gigTitle;
+    req.session.gigDescription = rows[0].gigDescription;
+    req.session.gigPoster = rows[0].user_id;
+    req.session.minBid = rows[0].minBid;
+    req.session.startBid = rows[0].startBid;
+    req.session.endBid = rows[0].endBid;
     console.log(rows[0]);
+
+    [rows, fields] = await connection.execute('SELECT * FROM `Gig_Bid` WHERE `gigPostID` = ?', [req.session.gigPostID]);
+    
+    if (rows[0]?.HighestBid == undefined){
+        req.session.highestBid = req.session.startBid;
+        req.session.highestBidder = " ";
+        req.session.noBidder = 1;
+    }
+    else{
+        req.session.highestBid = rows[0].Highest_Bid;
+        req.session.highestBidder = rows[0].user_id;
+        req.session.noBidder = 0;
+    }
+    
+    connection.end();
+    res.render("gig_post", {session: req.session});
 };
 
 const gig_post_post = async (req, res) => {
-    res.render("gig_post");
+
+    const connection = await mysql.createConnection({
+
+        host: 'sql12.freesqldatabase.com',
+        user: 'sql12592913',
+        database: 'sql12592913',
+        password: 'VCmJjDvxQy'
+    
+    });
+
+    var addBid = req.body;
+    console.log(addBid);
+
+    if (req.session.noBidder == 1){
+        //connection.query('INSERT INTO `Gig_Bid` (gigPostID, user_id, Highest_Bid) VALUES (?,?,?)', [req.session.gigPostID, req.session.user_id, addBid])
+    }
+    else{
+        //connection.query('ALTER TABLE)
+    }
+
+    res.redirect("gig_post");
 };
   
-
-//Temp
-//var gig_index = 2;
-
-/*async function Gig_Post(){
-
-    const [rows, fields] = await pool.execute('SELECT * FROM `Gig_Post` WHERE `gigPostID` = ?', [2]);
-    var Gig_Title = rows[0].gigTitle;
-    var Gig_ID = rows[0].gigPostID;
-    console.log(rows[0]);
-};*/
 
 module.exports = {gig_post_get, gig_post_post};

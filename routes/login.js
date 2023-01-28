@@ -26,7 +26,7 @@ const login_post = async (req, res) => {
         req.session.user_id = result[0].user_id;
         req.session.fName = result[0].fName;
         req.session.lName = result[0].lName;
-        res.redirect("/");
+        res.redirect("gig_post");
       }
     } else {
       res.render("login", { type: "error", message: "Email not registered" });
