@@ -23,6 +23,9 @@ const {
   admin_register_post,
 } = require("./routes/admin-register");
 
+const { create_gig_get, create_gig_post } = require("./routes/create-gig");
+
+
 // Set up Express JS
 const app = express();
 
@@ -51,7 +54,7 @@ app.use(
 app.use(express.static("public"));
 
 // Listening port
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 1303;
 
 // Routes
 app.get("/", index);
@@ -77,6 +80,10 @@ app.get("/admin-logout", admin_logout);
 app.get("/admin-register", admin_register_get);
 
 app.post("/admin-register", admin_register_post);
+
+app.get("/create-gig", create_gig_get);
+
+app.post("/create-gig", create_gig_post);
 
 app.listen(port, function () {
   console.log("Server started on port " + port);

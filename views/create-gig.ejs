@@ -1,5 +1,6 @@
+
 <!DOCTYPE html>
-<!-- <script type="text/javascript" src="create-gig.js"></script> -->
+<script type="text/javascript" src="create-gig.js"></script>
 <html  lang="en">
     <head>
         <meta charset="UTF-8" />
@@ -71,44 +72,54 @@
             <div class="card">
               <div class="card-body">
         <h1>Create Gig Form</h1>
-        
-        <form action=# method="post" name="createGig" onsubmit="validateForm()">
+        <% if (message) { %>
+            <div class="alert alert-<%= type %>" role="alert"><%= message %></div>
+            <% } %>
+        <form action=/create-gig method="post" name="createGig" onsubmit="validateForm()">
             <div class="form-group">
                 <label for="gigTitle"> Gig Title: </label><br>
-                <input type="text" id="gigTitle" name="gigTitle" required><br><br>
+                <input type="text" id="gigTitle" name="gigTitle" value="" required><br><br>
             </div>
             <div class="form-group">
             <label for="gigDesc"> Gig Description: </label><br>
-            <input type="text" id="gigDesc" name="gigDesc" required><br><br>
+            <input type="text" id="gigDesc" name="gigDesc" value="" required><br><br>
             </div>
             <div class="form-group">
-            <label for="minBid"> Minimum Bid (RM): </label><br>
-            <input type="float" id="minBid" name="minBid" required><br><br>
+                <label for="location"> Location </label><br>                    
+                <input type="text" id="location" name="location" value="<%= user.location %> - <%= location_name[0].location_name %> " required><br><br>     
+                
+            </div>
+            <div class="form-group">
+            <label for="minBidAmt"> Minimum Bid (RM): </label><br>
+            <input type="float" id="minBidAmt" name="minBidAmt" value="" required><br><br>
             </div>
             <div class="form-group">
             <label for="gigPoster"> Person In Charge: </label><br>
-            <input type="text" id="gigPoster" name="gigPoster" value="USER PROFILE NAME" required><br><br>
-        </div>
+            <input type="text" id="gigPoster" name="gigPoster" value="<%= user.fName %> <%= user.lName %>" required><br><br>
+         </div>
             <div class="form-group">
-            <label for="bidStart"> Start Bidding Amount: </label><br>  
-            <input type="float" id="bidStart" name="bidStart" required><br><br>
+            <label for="startBidAmt"> Start Bidding Amount: </label><br>  
+            <input type="float" id="startBidAmt" name="startBidAmt" value="" required><br><br>
         </div>
-            <div class="form-group">
-            <label for="bidEnd"> End Bidding Date: </label><br>    
-            <input type="date" id="bidEnd" name="bidEnd" required><br><br>
+        <div class="form-group">
+            <label for="endBidDate"> End Bidding Date: </label><br>    
+            <input type="date" id="endBidDate" name="endBidDate" value="" required><br><br>
             <!-- restriction for past date -->
-            <script> bidEnd.min = new Date().toLocaleDateString('en-ca');</script>
+            <!-- <script> bidEnd.min = new Date().toLocaleDateString('en-ca');</script> -->
+        </div>
+        <div class="form-group">
+            <label for="GigImage"> Upload Image</label><br>    
+            <input type="file" id="GigImage" name="GigImage" accept='image/*'><br><br>
         </div>
             
             <input id="createGig-btn" type="submit" value="Submit"  >
-            <!-- onclick=" return confirm('Do you want to submit?')" -->
 
         </form>
               </div>
               </div>
               </div>
 
-              <button onclick="message()">Click me!</button>
+            
     </body>
-    <script> src="create-gig.js"</script>
+    <!-- <script> src="create-gig.js"</script> -->
 </html>
