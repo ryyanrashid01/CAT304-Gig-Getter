@@ -1,4 +1,3 @@
-const session = require("express-session");
 const pool = require("../db");
 const bcrypt = require("bcrypt");
 
@@ -32,31 +31,35 @@ const admin_login_post = async (req, res) => {
   // }
 
   query = "SELECT * FROM Admin WHERE admin_Uname = '" + username + "'";
-  pool.query(query, async (err, result) => {
-    if (err) {
+  pool
+    .query(query)
+    .then(async (result) => {
+      result = result[0];
+      if (result.length == 1) {
+        var match = await bcrypt.compare(password, result[0].admin_Password);
+        if (!match) {
+          res.render("admin-login", {
+            type: "error",
+            message: "Password incorrect",
+          });
+        } else {
+          req.session.admin_id = result[0].admin_ID;
+          req.session.admin_Uname = result[0].admin_Uname;
+          res.redirect("/admin-panel");
+        }
+      } else {
+        res.render("admin-login", {
+          type: "error",
+          message: "Account not authorized",
+        });
+      }
+    })
+    .catch((err) => {
       res.render("admin-login", {
         type: "error",
         message: "Internal server error",
       });
-    } else if (result.length == 1) {
-      var match = await bcrypt.compare(password, result[0].admin_Password);
-      if (!match) {
-        res.render("admin-login", {
-          type: "error",
-          message: "Password incorrect",
-        });
-      } else {
-        req.session.admin_id = result[0].admin_ID;
-        req.session.admin_Uname = result[0].admin_Uname;
-        res.redirect("/admin-panel");
-      }
-    } else {
-      res.render("admin-login", {
-        type: "error",
-        message: "Account not authorized",
-      });
-    }
-  });
+    });
 };
 
 const admin_logout = (req, res) => {
