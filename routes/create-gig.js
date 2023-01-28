@@ -72,6 +72,7 @@ const create_gig_post = async (req,res) => {
         email:req.session.email,
         location: req.session.location
     };
+    var location_name = await pool.query("SELECT location_name FROM Location WHERE location_id =" + req.session.location);
 
     pool.query("SELECT * FROM Users WHERE user_id =?",
     [req.session.user_id]).then(async (result) => {
@@ -92,7 +93,8 @@ const create_gig_post = async (req,res) => {
         [req.session.user_id, gigTitle, gigDesc, minBidAmt, startBidAmt, endBidDate, req.session.location, GigImage]
         ).then(() => {
           res.render("create-gig", {
-            user: req.session.user_id,
+            user: req.session,
+            location_name: location_name[0],
             type: "success",
             message: "Gig registration successful!",
           });
