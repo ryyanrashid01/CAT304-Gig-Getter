@@ -23,12 +23,14 @@ const gig_post_get = async (req, res) => {
     req.session.gigPoster = rows[0].user_id;
     req.session.minBid = rows[0].minBid;
     req.session.startBid = rows[0].startBid;
-    req.session.endBid = rows[0].endBid;
-    console.log(rows[0]);
+    req.session.endBid = rows[0].endBid.toDateString();
+
+    var buf = rows[0].GigImage;
+    req.session.gigImage = 'data:image/jpeg;base64,' + buf.toString('base64');
 
     [rows, fields] = await connection.execute('SELECT * FROM `Gig_Bid` WHERE `gigPostID` = ?', [req.session.gigPostID]);
     
-    if (rows[0]?.HighestBid == undefined){
+    if (rows[0]?.Highest_Bid == undefined){
         req.session.highestBid = req.session.startBid;
         req.session.highestBidder = " ";
         req.session.noBidder = 1;
@@ -36,6 +38,8 @@ const gig_post_get = async (req, res) => {
     else{
         req.session.highestBid = rows[0].Highest_Bid;
         req.session.highestBidder = rows[0].user_id;
+        [rows, fields] = await connection.execute('SELECT * FROM `Users` WHERE `user_id` = ?', [req.session.highestBidder]);
+        req.session.highestBidder = rows[0].fName + " " + rows[0].lName;
         req.session.noBidder = 0;
     }
     
@@ -54,15 +58,16 @@ const gig_post_post = async (req, res) => {
     
     });
 
-    var addBid = req.body;
-    console.log(addBid);
+    var addBid = req.body.addBid;
 
     if (req.session.noBidder == 1){
-        //connection.query('INSERT INTO `Gig_Bid` (gigPostID, user_id, Highest_Bid) VALUES (?,?,?)', [req.session.gigPostID, req.session.user_id, addBid])
+        connection.query('INSERT INTO `Gig_Bid` (gigPostID, user_id, Highest_Bid) VALUES (?,?,?)', [req.session.gigPostID, req.session.user_id, addBid]);
     }
     else{
-        //connection.query('ALTER TABLE)
+        connection.query('UPDATE Gig_Bid SET user_id = ?, Highest_Bid = ? WHERE gigPostID = ?',[req.session.user_id, addBid, request.session.gigPostID]);
     }
+
+    connection.end();
 
     res.redirect("gig_post");
 };

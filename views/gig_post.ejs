@@ -20,15 +20,22 @@
             </div>
         </div>
     </nav>
-    <div class="bg-light" style="position: relative;top: 20px;margin: auto;width: 1000px;height: 450px;border-radius: 25px;background: rgb(255,255,255);"><img id="gigImage" style="position: absolute;top: 50px;left: 50px;width: 350px;height: 350px;">
+    <div class="bg-light" style="position: relative;top: 20px;margin: auto;width: 1000px;height: 450px;border-radius: 25px;background: rgb(255,255,255);">
+        <img id="gigImage" src=<%= session.gigImage %> style="position: absolute;top: 50px;left: 50px;width: 350px;height: 350px;">
         <h1 id="gigTitle" style="position: absolute;top: 60px;left: 450px;"><%= session.gigTitle %></h1>
         <h3 class="fw-normal" id="endBid" style="position: absolute;top: 120px;left: 450px;">Bid End Date: <%= session.endBid %>&nbsp;</h3>
         <h3 class="fw-normal" id="highestBidder" style="position: absolute;top: 170px;left: 450px;">Highest Bidder: <%= session.highestBidder %>&nbsp;</h3>
         <h3 class="fw-normal" id="highestBid" style="position: absolute;top: 220px;left: 450px;">Highest Bid: RM <%= session.highestBid %>&nbsp;</h3>
         <h3 class="fw-normal" id="minBid" style="position: absolute;top: 270px;left: 450px;">Minimum Bid: RM <%= session.minBid %>&nbsp;</h3>
-        <form action="/gig_post" method="post">
-            <input type="number" name="addBid" id="addBid" style="position: absolute;top: 330px;left: 450px;" min=<%= session.highestBid + session.minBid %> step=<%= session.minBid %> value=<%= session.highestBid + session.minBid %>><input class="btn btn-primary" type="submit" style="background: rgb(102,102,102);position: absolute;top: 325px;left: 650px;">
-        </form>
+        <% if (session.noBidder == 0) { %>
+            <form action="/gig_post" method="post">
+                <input type="number" name="addBid" id="addBid" style="position: absolute;top: 330px;left: 450px;" min=<%= session.highestBid + session.minBid %> step=1 value=<%= session.highestBid + session.minBid %>><input class="btn btn-primary" type="submit" style="background: rgb(102,102,102);position: absolute;top: 325px;left: 650px;">
+            </form>
+        <% } else{ %>
+            <form action="/gig_post" method="post">
+                <input type="number" name="addBid" id="addBid" style="position: absolute;top: 330px;left: 450px;" min=<%= session.highestBid %> step=1 value=<%= session.highestBid %>><input class="btn btn-primary" type="submit" style="background: rgb(102,102,102);position: absolute;top: 325px;left: 650px;">
+            </form>
+        <% } %>
         
     </div>
     <div style="position: relative;top: 60px;margin: auto;width: 1000px;height: 250px;border-radius: 25px;padding: 25px;background: rgb(255,255,255);">
@@ -38,7 +45,8 @@
     <div style="position: relative;top: 90px;margin: auto;width: 1000px;height: 500px;border-radius: 25px;padding: 25px;background: rgb(255,255,255);">
         <h2 class="text-center">Reviews</h2>
         <div style="position: relative;padding: 25px;height: 200px;">
-            <h4 class="fw-normal text-center" style="position: absolute;left: 250px;top: 105px;">Hee Hee</h4><img style="position: absolute;left: 60px;height: 150px;width: 150px;border-radius: 20px;" src="https://static.wikia.nocookie.net/bttf/images/2/2c/Michael_Jackson.jpg/revision/latest?cb=20220625105913">
+            <h4 class="fw-normal text-center" style="position: absolute;left: 250px;top: 105px;">Hee Hee</h4>
+            <img style="position: absolute;left: 60px;height: 150px;width: 150px;border-radius: 20px;" src="https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTkyMjkwNTI2MDAxNjM2NTg4/michael-jackson-gettyimages-89446104.jpg">
             <h4 class="text-center" style="position: absolute;left: 250px;top: 30px;">Michael Jackson</h4>
             <h4 class="fw-normal text-center" style="position: absolute;left: 250px;top: 65px;">Rating: 4/5</h4>
         </div>
