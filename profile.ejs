@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    />
+    <title><%= fName %> <%= lName %></title>
+  </head>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+      color: #343a40;
+    }
+    .container {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 1rem;
+      background-color: #ffffff;
+      opacity: 0.8;
+      background-image: repeating-radial-gradient(
+          circle at 0 0,
+          transparent 0,
+          #ffffff 40px
+        ),
+        repeating-linear-gradient(#ced4da55, #ced4da);
+    }
+    .card {
+      width: 60vw;
+      height: 60vh;
+      background-color: white;
+      border: 1px solid #ced4da;
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+        rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+        rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    }
+    .left-side {
+      background-color: #f1f3f5;
+      border-right: 1px solid #ced4da;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .avatar {
+      border-radius: 50%;
+    }
+    .user-details1 {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .user_name {
+      font-size: 1.2rem;
+      text-align: center;
+    }
+    .user-id {
+      text-align: center;
+      color: #6a6e72;
+      font-size: 0.8rem;
+    }
+    .bio {
+      margin-top: 2rem;
+      padding: 0 2rem;
+    }
+    .right-side {
+      padding: 2rem;
+      position: relative;
+    }
+    .right-side h1 {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+    }
+    .avatar {
+      width: 10rem;
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+      border: 5px solid white;
+    }
+    .user-details2 {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .user-details2 div {
+      border: 1px solid #ced4da;
+      padding: 0.5rem 2rem;
+    }
+    .socials {
+      margin-top: 1rem;
+    }
+    .icons {
+      margin-top: 1rem;
+      display: flex;
+      gap: 1rem;
+    }
+    .icons a {
+      color: #343a40;
+      text-decoration: none;
+    }
+    .icons a i {
+      font-size: 3rem;
+    }
+    .icons a i:hover {
+      color: #6a6e72;
+    }
+    .status {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      padding: 0.5rem;
+      font-size: 0.8rem;
+      color: #6a6e72;
+    }
+    .icon-active {
+      color: #47b96b;
+    }
+    .icon-banned {
+      color: #f70000;
+    }
+    .banned {
+      background-color: #ffa8a8;
+      border: 1px solid #ff6b6b;
+      padding: 1rem 2rem;
+      width: 60vw;
+      text-align: center;
+    }
+  </style>
+  <body>
+    <div class="container">
+      <div class="card">
+        <div class="left-side">
+          <img
+            src="https://avatars.dicebear.com/api/adventurer-neutral/<%= fName %> <%= lName %>.svg"
+            alt=""
+            class="avatar"
+          />
+          <div class="user-details1">
+            <div class="user_name"><%= fName %> <%= lName %></div>
+            <div class="user-id">#<%= user_id %></div>
+          </div>
+        </div>
+        <div class="right-side">
+          <h1>User Details</h1>
+          <div class="user-details2">
+            <div class="email">
+              <b>Email:</b><br />
+              <%= email %>
+            </div>
+            <div class="dob">
+              <b>Date of Birth:</b><br />
+              <%= dob %>
+            </div>
+            <% if (location) { %>
+            <div class="address">
+              <b>Location:</b><br />
+              <%= location %>
+            </div>
+            <% } %>
+          </div>
+          <div class="status">
+            Account status: <span class="icon-<%= status %>">●</span> <%= status
+            %>
+          </div>
+        </div>
+      </div>
+      <% if (status === "banned") {%>
+      <div class="banned">
+        <i class="fa-solid fa-ban"></i> Account closed for violating terms and
+        services.
+      </div>
+      <% } %>
+    </div>
+  </body>
+</html>
