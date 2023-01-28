@@ -1,5 +1,5 @@
 const pool = require("../db");
-const { escape } = require("mysql");
+const { escape } = require("mysql2");
 const bcrypt = require("bcrypt");
 
 const admin_register_get = (req, res) => {

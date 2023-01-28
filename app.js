@@ -25,6 +25,8 @@ const {
 
 const { create_gig_get, create_gig_post } = require("./routes/create-gig");
 
+const manageUser_get = require("./routes/manageUser");
+
 
 // Set up Express JS
 const app = express();
@@ -84,6 +86,8 @@ app.post("/admin-register", admin_register_post);
 app.get("/create-gig", create_gig_get);
 
 app.post("/create-gig", create_gig_post);
+
+app.get("/manageUser", manageUser_get);
 
 app.listen(port, function () {
   console.log("Server started on port " + port);
