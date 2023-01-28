@@ -22,6 +22,16 @@ const {
   admin_register_get,
   admin_register_post,
 } = require("./routes/admin-register");
+const { profile_get } = require("./routes/profile");
+const { my_profile_get, my_profile_post } = require("./routes/my-profile");
+
+
+
+// anis
+const { location_get, location_post} = require("./routes/location");
+// const { marketplace_get} = require("./routes/marketplace");
+// const { service_get} = require("./routes/location");
+// 
 
 // Set up Express JS
 const app = express();
@@ -78,6 +88,20 @@ app.get("/admin-register", admin_register_get);
 
 app.post("/admin-register", admin_register_post);
 
+app.get("/profile", my_profile_get);
+
+app.post("/profile", my_profile_post);
+
+app.get("/profile/:userId", profile_get);
+
+// anis
+app.get("/location", location_get);
+app.post("/location", location_post);
+// app.get("/marketplace", marketplace_get);
+// app.get("/location", service_get);
+// 
+
 app.listen(port, function () {
   console.log("Server started on port " + port);
 });
+
