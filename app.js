@@ -25,12 +25,15 @@ const {
 const { profile_get } = require("./routes/profile");
 const { my_profile_get, my_profile_post } = require("./routes/my-profile");
 
-
-
 // anis
 const { marketplace_get, marketplace_post } = require("./routes/marketplace");
-// const { service_get} = require("./routes/location");
-// 
+
+// justin
+const {
+  gig_post_get,
+  gig_post_post
+} = require("./routes/gig_post");
+
 
 // Set up Express JS
 const app = express();
@@ -95,7 +98,14 @@ app.get("/profile/:userId", profile_get);
 
 // anis
 app.get("/marketplace", marketplace_get);
+
 app.post("/marketplace", marketplace_post);
+
+
+// justin
+app.get("/gig_post", gig_post_get);
+
+app.post("/gig_post", gig_post_post);
 
 app.listen(port, function () {
   console.log("Server started on port " + port);
