@@ -68,7 +68,7 @@ app.use(
 app.use(express.static("public"));
 
 // Listening port
-const port = process.env.PORT || 1303;
+const port = process.env.PORT || 3000;
 
 // Routes
 app.get("/", index);

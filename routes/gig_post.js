@@ -63,7 +63,7 @@ const gig_post_post = async (req, res) => {
         connection.query('INSERT INTO `Gig_Bid` (gigPostID, user_id, Highest_Bid) VALUES (?,?,?)', [req.session.gigPostID, req.session.user_id, addBid]);
     }
     else{
-        connection.query('UPDATE Gig_Bid SET user_id = ?, Highest_Bid = ? WHERE gigPostID = ?',[req.session.user_id, addBid, request.session.gigPostID]);
+        connection.query('UPDATE `Gig_Bid` SET user_id = ?, Highest_Bid = ? WHERE gigPostID = ?', [req.session.user_id, addBid, req.session.gigPostID]);
     }
 
     connection.end();
