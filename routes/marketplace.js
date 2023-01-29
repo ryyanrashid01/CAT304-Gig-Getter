@@ -44,8 +44,9 @@ const marketplace_get = async (req, res) => {
 };
 
 const marketplace_post = async (req, res) => {
-
-};
+  req.session.gigPostID = req.body.button;
+  res.redirect("gig_post");
+}
 
 module.exports = { marketplace_get, marketplace_post };
 

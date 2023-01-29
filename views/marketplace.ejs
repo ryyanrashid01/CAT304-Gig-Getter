@@ -10,6 +10,7 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="script/gig_post/bootstrap/css/bootstrap.min.css">
     <title>Gig Getter | Marketplace</title>
   </head>
 
@@ -126,7 +127,17 @@ img {
   </style>
 
   <body>
-
+    <nav class="navbar navbar-light navbar-expand-md bg-light border rounded-0 shadow" style="background: rgb(255,255,255);">
+      <div class="container-fluid"><a class="navbar-brand fw-semibold" href="#">Gig Getter</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+          <div class="collapse navbar-collapse" id="navcol-1">
+              <ul class="navbar-nav ms-auto">
+                  <li class="nav-item"><a class="nav-link active" id="profilePage" href="/profile">Profile Page</a></li>
+                  <li class="nav-item"><a class="nav-link active" id="createPost" href="#">Create Post</a></li>
+                  <li class="nav-item"><a class="nav-link active" id="logout" href="/logout">Logout</a></li>
+              </ul>
+          </div>
+      </div>
+  </nav>
   
     <h2 style="text-align:center">Services available</h2>
 
@@ -136,14 +147,16 @@ img {
     <% for(i=0;i<marketplaces.length;i++){  %>
 
 
-  <div class="card">
+  <div style= "margin: auto" class="card">
     <div class="container"> 
-    <h3><a href="#"><%=marketplaces[i].gigTitle%></a></h3>
+    <h3><%=marketplaces[i].gigTitle%></h3>
     <h5><%=marketplaces[i].fName%> <%=marketplaces[i].lName%></h5> 
     <h5><%=marketplaces[i].gigDescription%></h5>
    
     <br>
-    <button onclick = <% req.session.gigPostID = marketplaces[i].gigPostID; req.redirect("/gig_post") %>   class="button">Book</button>
+    <form action="/marketplace" method="post">
+      <button name = "button" value = <%=marketplaces[i].gigPostID%>  type="submit" class="button">Book</button>
+    </form>
     <br>
     <br>
     </div>
@@ -160,12 +173,15 @@ img {
             <br>
             <%  }  %>
 
-   
+            <script>
+              function myFunction() {
+                document.getElementById("demo").innerHTML = "YOU CLICKED ME!";
+              }
+            </script>
+            
     
 
 
 </body>
-
-  </body>
 
 </html>

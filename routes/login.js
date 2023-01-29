@@ -38,7 +38,7 @@ const login_post = async (req, res) => {
           req.session.email = result[0].email;
           req.session.dob = moment(result[0].dob).format("MMM DD, YYYY");
           req.session.location = result[0].location_id;
-          res.redirect("/");
+          res.redirect("/marketplace");
         }
       } else {
         res.render("login", { type: "error", message: "Email not registered" });

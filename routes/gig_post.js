@@ -16,7 +16,6 @@ const gig_post_get = async (req, res) => {
     
     });
 
-    req.session.gigPostID = 1;
     var [rows, fields] = await connection.execute('SELECT * FROM `Gig_Post` WHERE `gigPostID` = ?', [req.session.gigPostID]);
     req.session.gigTitle = rows[0].gigTitle;
     req.session.gigDescription = rows[0].gigDescription;

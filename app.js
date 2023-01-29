@@ -101,7 +101,6 @@ app.get("/marketplace", marketplace_get);
 
 app.post("/marketplace", marketplace_post);
 
-
 // justin
 app.get("/gig_post", gig_post_get);
 
