@@ -35,6 +35,11 @@ const {
 } = require("./routes/gig_post");
 
 
+const { create_gig_get, create_gig_post } = require("./routes/create-gig");
+
+const manageUser_get = require("./routes/manageUser");
+
+
 // Set up Express JS
 const app = express();
 
@@ -63,7 +68,7 @@ app.use(
 app.use(express.static("public"));
 
 // Listening port
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 1303;
 
 // Routes
 app.get("/", index);
@@ -105,6 +110,13 @@ app.post("/marketplace", marketplace_post);
 app.get("/gig_post", gig_post_get);
 
 app.post("/gig_post", gig_post_post);
+
+//afina
+app.get("/create-gig", create_gig_get);
+
+app.post("/create-gig", create_gig_post);
+
+app.get("/manageUser", manageUser_get);
 
 app.listen(port, function () {
   console.log("Server started on port " + port);
