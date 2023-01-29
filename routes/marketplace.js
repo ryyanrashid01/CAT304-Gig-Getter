@@ -15,7 +15,7 @@ const marketplace_get = async (req, res) => {
       .query("SELECT * FROM Users WHERE user_id =?", [req.session.user_id])
       .then(async (result) => {
         result = result[0];
-        const marketplaces = await pool.query("SELECT * FROM Gig_Post");
+        const marketplaces = await pool.query("SELECT * FROM Gig_Post WHERE location_id = ?", [req.session.location]);
         if (result[0]) {
           res.render("marketplace", {
             type: null,
@@ -43,8 +43,11 @@ const marketplace_get = async (req, res) => {
   }
 };
 
+const marketplace_post = async (req, res) => {
 
-module.exports = { marketplace_get };
+};
+
+module.exports = { marketplace_get, marketplace_post };
 
 // const pool = require("../db");
 

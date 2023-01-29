@@ -28,8 +28,7 @@ const { my_profile_get, my_profile_post } = require("./routes/my-profile");
 
 
 // anis
-const { location_get, location_post} = require("./routes/location");
-// const { marketplace_get} = require("./routes/marketplace");
+const { marketplace_get, marketplace_post } = require("./routes/marketplace");
 // const { service_get} = require("./routes/location");
 // 
 
@@ -95,11 +94,8 @@ app.post("/profile", my_profile_post);
 app.get("/profile/:userId", profile_get);
 
 // anis
-app.get("/location", location_get);
-app.post("/location", location_post);
-// app.get("/marketplace", marketplace_get);
-// app.get("/location", service_get);
-// 
+app.get("/marketplace", marketplace_get);
+app.post("/marketplace", marketplace_post);
 
 app.listen(port, function () {
   console.log("Server started on port " + port);
